@@ -1,0 +1,24 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: carevoice-backend
+  profiles:
+    active: dev
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+
+carevoice:
+  jwt:
+    secret: ${JWT_SECRET:CareVoiceSuperSecretSigningKeyForProductionAdherenceTracking2026!}
+    expiration-ms: 86400000 # 24 hours
+  telephony:
+    provider: ${TELEPHONY_PROVIDER:simulator} # 'simulator' or 'twilio'
+    account-sid: ${TWILIO_ACCOUNT_SID:}
+    auth-token: ${TWILIO_AUTH_TOKEN:}
+    from-number: ${TWILIO_FROM_NUMBER:+15005550006}
+    webhook-base-url: ${WEBHOOK_BASE_URL:http://localhost:8080}
+    max-retries: 2
+    retry-delay-minutes: 10
